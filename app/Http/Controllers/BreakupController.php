@@ -9,21 +9,27 @@ class BreakupController extends Controller
 
     public function index(Request $request)
     {
+        //Here we check if the user has given us valid input
         $this->validate($request, [
             'text' => 'required',
             'count' => 'required|numeric'
         ]);
         
+        //Setup an empty array
         $newText = [];
 
+        //Break up the text the user sent through into big chunks at every semicolon
         $chunks = explode(';', $request->text);
 
+        //For every chunk that we make, break it into the size chunks that the user asks for
         foreach ($chunks as $chunk => $text) {
             $newText[] = $this->break($text, $request->count);
         }
 
+        //Make a temporary text file that has all of the chunks together
         $textFile = $this->generateTextFile($newText);
 
+        //Show the user the pretty version
         return view('broken', compact(['newText', 'textFile']));
     }
 
@@ -34,17 +40,30 @@ class BreakupController extends Controller
      */
     private function break($chunk, $size)
     {
+        //This will contain all the small chunks
         $return = [];
         $x = 0;
 
+        //While the variable $x is less than the length of the big chunk
         while($x <= strlen($chunk)) {
+            //Add a small chunk to what we will show to the user
             $return[] = substr($chunk,$x,$size);
+            //Add the length of the small chunk to $x, 
+            //so that when this function repeats
+            //it will start further into the big chunk
             $x+= $size;
         }
 
+        //return all the smaller chunks
         return $return;
     }
 
+    /**
+     * This function loops through the small chunks we've created
+     * and writes them to a text file
+     * @param  Array $text Array of arrays of short chunks of text
+     * @return String       Location of the text file, to give to the user
+     */
     private function generateTextFile($text) {
         $formattedText = '';
         foreach($text as $largeChunk) {
