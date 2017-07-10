@@ -8,7 +8,7 @@
             <input class="form-control" type="text" name="count" placeholder="Size of chunks">
         </div>
         <div class="form-group">
-            <textarea class="form-control" name="text" placeholder="The text to be broken up"></textarea>
+            <textarea class="form-control" rows="15" name="text" placeholder="The text to be broken up"></textarea>
         </div>
         <div class="form-group">
             <button class="btn btn-block btn-primary" type="submit">
