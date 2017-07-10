@@ -21,7 +21,10 @@ class BreakupController extends Controller
         foreach ($chunks as $chunk => $text) {
             $newText[] = $this->break($text, $request->count);
         }
-        return view('broken', compact(['newText']));
+
+        $textFile = $this->generateTextFile($newText);
+
+        return view('broken', compact(['newText', 'textFile']));
     }
 
     /**
@@ -40,6 +43,22 @@ class BreakupController extends Controller
         }
 
         return $return;
+    }
+
+    private function generateTextFile($text) {
+        $formattedText = '';
+        foreach($text as $largeChunk) {
+            foreach($largeChunk as $smallChunk) {
+                $formattedText.= $smallChunk;
+                $formattedText.= "\n\n\n\n\n\n";
+            }
+            $formattedText.= "---";
+            $formattedText.= "\n\n\n\n\n\n";
+        }
+        $file_location = '/tmp/brokenText_' . date('m-d-Y_hia') . '.txt';
+        $file = file_put_contents(public_path() . $file_location , $formattedText);
+
+        return $file_location;
     }
 
 }
