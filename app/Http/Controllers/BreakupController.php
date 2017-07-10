@@ -15,13 +15,17 @@ class BreakupController extends Controller
             'count' => 'required|numeric'
         ]);
         
-        //Setup an empty array
+        //newText will hold all of the chunks of text
         $newText = [];
 
         //Break up the text the user sent through into big chunks at every semicolon
+        //We can visualise it like this
+        //['Chunk 1', 'Chunk 2', 'Chunk 3']
         $chunks = explode(';', $request->text);
 
         //For every chunk that we make, break it into the size chunks that the user asks for
+        //We can visualise it like this:
+        //[[Chunk 1a, Chunk 1b, Chunk 1c], [Chunk 2a, Chunk 2b], [Chunk 3a... etc]]
         foreach ($chunks as $chunk => $text) {
             $newText[] = $this->break($text, $request->count);
         }
