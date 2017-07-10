@@ -55,7 +55,7 @@ class BreakupController extends Controller
             $formattedText.= "---";
             $formattedText.= "\n\n\n\n\n\n";
         }
-        $file_location = '/tmp/brokenText_' . date('m-d-Y_hia') . '.txt';
+        $file_location = '/tmp/brokenText_' . date('Y-m-d_') . rand(1000, 5000) . '.txt';
         $file = file_put_contents(public_path() . $file_location , $formattedText);
 
         return $file_location;
