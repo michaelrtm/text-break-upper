@@ -8,6 +8,10 @@
             margin-top:25px;
             margin-bottom:25px;
         }
+        .meta p{
+            margin: 0;
+            padding: 0;
+        }
     </style>
 </head>
 <body>

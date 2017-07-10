@@ -16,4 +16,9 @@
             </button>
         </div>
     </form>
+    <div class="meta">
+        <p><small>Created by <a href="https://twitter.com/michaelrtm">Michael Jones</a></small></p>
+        <p><small>Not that you'll want it, but get the source at <a href="https://github.com/michaelrtm/text-break-upper">GitHub</a></small></p>
+        <p><small>If this breaks anything, I didn't do it. If this makes you money, I get 50%.</small></p>
+    </div>
 @stop
